@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://wem4xw7dtsjt"]
+[gd_scene load_steps=3 format=3 uid="uid://ddnyi4qwmgb37"]
+
+[ext_resource type="Texture2D" uid="uid://bcm7i31o2cuii" path="res://assets/flytop.png" id="1_viyhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltkt8"]
 size = Vector2(50, 50)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a6hap"]
-width = 50
-height = 50
 
 [node name="Fly" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -13,5 +11,7 @@ gravity_scale = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ltkt8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_a6hap")
+[node name="Flytop" type="Sprite2D" parent="."]
+position = Vector2(-1.43051e-06, -1.43051e-06)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_viyhk")
