@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgtewmerkpp3o"]
+[gd_scene load_steps=3 format=3 uid="uid://bgtewmerkpp3o"]
 
+[ext_resource type="Script" path="res://scripts/swamp.gd" id="1_bjoxf"]
 [ext_resource type="PackedScene" uid="uid://0nit1ug74kh2" path="res://scenes/player.tscn" id="1_d5svk"]
 
 [node name="level" type="Node2D"]
+script = ExtResource("1_bjoxf")
 
 [node name="player" parent="." instance=ExtResource("1_d5svk")]
