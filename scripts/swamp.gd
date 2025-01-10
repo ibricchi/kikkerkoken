@@ -8,10 +8,17 @@ extends Node
 
 @onready var fly_res: Resource = preload("res://scenes/fly.tscn")
 
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#for i in 
+var flies = []
 
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for i in number_to_spwan:
+		var fly = fly_res.instance()
+		var x = randf_range(random_x_start, random_x_end)
+		var y = randf_range(random_y_start, random_y_end)
+		add_child(fly)
+		fly.position = Vector2(x, y)
+		flies.push_back(flies)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
