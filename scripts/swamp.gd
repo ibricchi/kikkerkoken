@@ -28,7 +28,6 @@ var points: int = 0:
 		points = new_points
 		if points >= points_to_next_part:
 			points -= points_to_next_part
-			print(points)
 			points_to_next_part *= ptnp_mult
 			release_a_new_part()
 		ui.update_point_counter(points)
