@@ -1,22 +1,100 @@
-[gd_scene load_steps=4 format=3 uid="uid://0nit1ug74kh2"]
+[gd_scene load_steps=12 format=3 uid="uid://0nit1ug74kh2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ddw4"]
-[ext_resource type="Texture2D" uid="uid://b1tjrjsw5mbfd" path="res://assets/tadpole0.png" id="2_1w38y"]
+[ext_resource type="Texture2D" uid="uid://cyxpduslhf4um" path="res://assets/tadpole1anim.png" id="2_43ugr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t40hw"]
-radius = 16.0
-height = 67.0
+radius = 11.0
+height = 53.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydmmo"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4esd"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w36qt"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae40j"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5f84"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdqx3"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw1ok"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nr4ay"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydmmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4esd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w36qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae40j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w36qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4esd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydmmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5f84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdqx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw1ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdqx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5f84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydmmo")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 10.0
+}]
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1ddw4")
 
-[node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("2_1w38y")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, 0)
+position = Vector2(5, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_t40hw")
 
 [node name="camera" type="Camera2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nr4ay")
+animation = &"swim"
+autoplay = "swim"
+frame_progress = 0.124394
