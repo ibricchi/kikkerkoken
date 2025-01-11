@@ -2,9 +2,9 @@ extends Node
 
 @export var number_to_spwan: int = 10
 @export var random_x_start: int = 0
-@export var random_x_end: int = 500
+@export var random_x_end: int = 1000
 @export var random_y_start: int = 0
-@export var random_y_end: int = 300
+@export var random_y_end: int = 500
 
 @onready var fly_res: Resource = preload("res://scenes/fly.tscn")
 

@@ -7,3 +7,7 @@
 script = ExtResource("1_bjoxf")
 
 [node name="player" parent="." instance=ExtResource("1_d5svk")]
+position = Vector2(560, 322)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position_smoothing_enabled = true
