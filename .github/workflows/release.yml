@@ -11,6 +11,9 @@ env:
   EXPORT_NAME: kikkerkoken
   PROJECT_PATH: .
 
+permisions:
+  actions: write
+
 jobs:
   # export-windows:
   #   name: Windows Export

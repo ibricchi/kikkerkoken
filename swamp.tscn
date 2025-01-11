@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgtewmerkpp3o"]
+[gd_scene load_steps=4 format=3 uid="uid://bgtewmerkpp3o"]
 
 [ext_resource type="Script" path="res://scripts/swamp.gd" id="1_bjoxf"]
 [ext_resource type="PackedScene" uid="uid://0nit1ug74kh2" path="res://scenes/player.tscn" id="1_d5svk"]
+[ext_resource type="PackedScene" uid="uid://hie6y7rxqhgg" path="res://scenes/fly_trap.tscn" id="3_3vi45"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_bjoxf")
@@ -9,5 +10,5 @@ script = ExtResource("1_bjoxf")
 [node name="player" parent="." instance=ExtResource("1_d5svk")]
 position = Vector2(560, 322)
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-position_smoothing_enabled = true
+[node name="point_trap" parent="." instance=ExtResource("3_3vi45")]
+position = Vector2(234, 490)

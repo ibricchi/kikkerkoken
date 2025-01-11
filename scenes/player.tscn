@@ -18,3 +18,5 @@ texture = ExtResource("2_1w38y")
 position = Vector2(-2.5, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_t40hw")
+
+[node name="camera" type="Camera2D" parent="."]
