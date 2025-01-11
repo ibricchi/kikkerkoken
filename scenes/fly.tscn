@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://scripts/fly.gd" id="1_2d2wq"]
 [ext_resource type="Texture2D" uid="uid://bcm7i31o2cuii" path="res://assets/flytop.png" id="1_viyhk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jktmf"]
-radius = 27.0185
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qwnmi"]
+radius = 11.0
+height = 40.0
 
 [node name="Fly" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -16,4 +17,6 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_viyhk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_jktmf")
+position = Vector2(3, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qwnmi")
