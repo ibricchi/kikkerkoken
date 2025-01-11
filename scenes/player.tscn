@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0nit1ug74kh2"]
+[gd_scene load_steps=15 format=3 uid="uid://0nit1ug74kh2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ddw4"]
 [ext_resource type="Texture2D" uid="uid://cyxpduslhf4um" path="res://assets/tadpole1anim.png" id="2_43ugr"]
@@ -6,6 +6,18 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t40hw"]
 radius = 11.0
 height = 53.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hohk1"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oskqq"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8r5u"]
+atlas = ExtResource("2_43ugr")
+region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydmmo"]
 atlas = ExtResource("2_43ugr")
@@ -37,6 +49,23 @@ region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nr4ay"]
 animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_hohk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oskqq")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_hohk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8r5u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ydmmo")
@@ -95,6 +124,4 @@ shape = SubResource("CapsuleShape2D_t40hw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nr4ay")
-animation = &"swim"
-autoplay = "swim"
-frame_progress = 0.124394
+animation = &"idle"

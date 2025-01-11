@@ -38,6 +38,18 @@ func _physics_process(delta):
 	self.velocity = lerp(self.velocity, target_velocity, lerp_fact * delta)
 	if (input != Vector2.ZERO):
 		self.rotation = lerp_angle(self.rotation, atan2(self.velocity.y, self.velocity.x), rotation_speed * delta)
+	 
+	if self.velocity.length() < 15:
+		$AnimatedSprite2D.play("idle")
+	elif self.velocity.length() < 60:
+		$AnimatedSprite2D.play("swim")
+		$AnimatedSprite2D.speed_scale = 1
+	else:
+		$AnimatedSprite2D.play("swim")
+		$AnimatedSprite2D.speed_scale = 1.6
+		
+		
+		
 	
 	if move_and_slide():
 		var col = get_last_slide_collision()
