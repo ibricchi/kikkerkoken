@@ -45,9 +45,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qwnmi"]
-radius = 11.0
-height = 40.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtgmd"]
+radius = 29.0172
 
 [node name="Fly" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -63,4 +62,4 @@ frame_progress = 0.195183
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_qwnmi")
+shape = SubResource("CircleShape2D_vtgmd")

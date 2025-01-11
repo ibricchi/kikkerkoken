@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkt4os1rdvcj6"
-path="res://.godot/imported/fly_trap.png-ad5e64a74893f2b7a4b66d657f14eb70.ctex"
+path="res://.godot/imported/no-image.png-109a55252d164122e661b5d7e4750084.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fly_trap.png"
-dest_files=["res://.godot/imported/fly_trap.png-ad5e64a74893f2b7a4b66d657f14eb70.ctex"]
+source_file="res://assets/no-image.png"
+dest_files=["res://.godot/imported/no-image.png-109a55252d164122e661b5d7e4750084.ctex"]
 
 [params]
 

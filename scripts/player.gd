@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var max_speed: int = 200
+@export var max_speed: int = 400
 @export var acceleartion: float = 0.9
 @export var deceleration: float = 1.2
 @export var push_force: float = 20000
 @export var rotation_speed: float = 10
 
 @onready var camera: Camera2D = get_node("camera")
-@onready var zoom: Vector2 = Vector2(1,1): set = _set_zoom
+@onready var zoom: Vector2 = Vector2(3,3): set = _set_zoom
 func _set_zoom(_zoom: Vector2):
 	zoom = _zoom
 	camera.zoom = zoom

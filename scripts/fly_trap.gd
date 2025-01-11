@@ -1,4 +1,5 @@
 extends Area2D
+class_name FlyTrap
 
 func _ready():
 	self.monitoring = false

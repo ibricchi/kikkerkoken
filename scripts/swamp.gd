@@ -1,6 +1,6 @@
 extends Node
 
-@export var number_to_spwan: int = 10
+@export var number_to_spwan: int = 20
 @export var random_x_start: int = 0
 @export var random_x_end: int = 1000
 @export var random_y_start: int = 0
@@ -8,25 +8,36 @@ extends Node
 
 @onready var fly_res: Resource = preload("res://scenes/fly.tscn")
 
-@onready var point_trap = self.get_node("point_trap")
+@onready var point_trap: FlyTrap = $point_trap
+@onready var ui: SwampUI = $UI
 
 var flies = []
+func spawn_fly():
+	var fly = preload("res://scenes/fly.tscn").instantiate()
+	self.add_child(fly)
+	fly.position = Vector2(
+		randf_range(random_x_start, random_x_end),
+		randf_range(random_y_start, random_y_end)
+	)
+	flies.push_back(fly)
+
+var points = 0:
+	set(new_points):
+		ui.update_point_counter(new_points)
+		points = new_points
+func entered_point_trap(fly: Node2D):
+	if fly is Fly:
+		flies.erase(fly)
+		self.remove_child(fly)
+		points += 1
+		spawn_fly() 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	point_trap.body_entered_callback = remove_fly
-	for i in range(number_to_spwan):
-		var fly = fly_res.instantiate()
-		var x = randf_range(random_x_start, random_x_end)
-		var y = randf_range(random_y_start, random_y_end)
-		add_child(fly)
-		fly.position = Vector2(x, y)
-		flies.push_back(fly)
+	for i in number_to_spwan:
+		spawn_fly()
+	point_trap.body_entered_callback = entered_point_trap
 
-func remove_fly(fly: Node2D):
-	if fly in flies:
-		flies.erase(fly)
-		remove_child(fly)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Fly
 
 var wander_orientation : float = 0
 var wander_time : float = 3.0 
