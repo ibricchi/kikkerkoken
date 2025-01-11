@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://wem4xw7dtsjt"]
+[gd_scene load_steps=4 format=3 uid="uid://wem4xw7dtsjt"]
 
+[ext_resource type="Script" path="res://scripts/fly.gd" id="1_2d2wq"]
 [ext_resource type="Texture2D" uid="uid://bcm7i31o2cuii" path="res://assets/flytop.png" id="1_viyhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltkt8"]
@@ -7,6 +8,7 @@ size = Vector2(50, 50)
 
 [node name="Fly" type="RigidBody2D"]
 gravity_scale = 0.0
+script = ExtResource("1_2d2wq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ltkt8")
