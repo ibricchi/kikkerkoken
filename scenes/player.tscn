@@ -3,10 +3,6 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ddw4"]
 [ext_resource type="Texture2D" uid="uid://cyxpduslhf4um" path="res://assets/tadpole1anim.png" id="2_43ugr"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t40hw"]
-radius = 11.0
-height = 53.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_hohk1"]
 atlas = ExtResource("2_43ugr")
 region = Rect2(0, 0, 64, 64)
@@ -111,17 +107,21 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t40hw"]
+radius = 18.0
+height = 54.0
+
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1ddw4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_t40hw")
 
 [node name="camera" type="Camera2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nr4ay")
-animation = &"idle"
+animation = &"swim"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_t40hw")
