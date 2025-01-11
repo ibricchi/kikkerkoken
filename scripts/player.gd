@@ -7,10 +7,10 @@ extends CharacterBody2D
 @export var rotation_speed: float = 10
 
 @onready var camera: Camera2D = get_node("camera")
-@onready var zoom: Vector2 = Vector2(3,3): set = _set_zoom
-func _set_zoom(_zoom: Vector2):
-	zoom = _zoom
-	camera.zoom = zoom
+@onready var zoom: Vector2 = Vector2(3,3):
+	set(_zoom):
+		zoom = _zoom
+		camera.zoom = zoom
 
 func _ready() -> void:
 	camera.zoom = zoom

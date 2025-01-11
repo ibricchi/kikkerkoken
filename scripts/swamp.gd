@@ -21,16 +21,28 @@ func spawn_fly():
 	)
 	flies.push_back(fly)
 
-var points = 0:
+var points_to_next_part: int = 1;
+var ptnp_mult: float = 2;
+var points: int = 0:
 	set(new_points):
-		ui.update_point_counter(new_points)
 		points = new_points
+		if points >= points_to_next_part:
+			points -= points_to_next_part
+			print(points)
+			points_to_next_part *= ptnp_mult
+			release_a_new_part()
+		ui.update_point_counter(points)
+
+func release_a_new_part():
+	ui.notify("Congrats you unlocked a new part, go find it!")
+	pass
+
 func entered_point_trap(fly: Node2D):
 	if fly is Fly:
 		flies.erase(fly)
 		self.remove_child(fly)
 		points += 1
-		spawn_fly() 
+		spawn_fly()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
