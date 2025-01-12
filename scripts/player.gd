@@ -8,7 +8,9 @@ class_name Player
 @export var rotation_speed: float = 10
 
 @onready var camera: Camera2D = get_node("camera")
-@onready var zoom: Vector2 = Vector2(3,3):
+@export var zoom_speed: float = 1
+@export var target_zoom: Vector2 = Vector2(3, 3)
+@onready var zoom: Vector2 = target_zoom:
 	set(_zoom):
 		zoom = _zoom
 		camera.zoom = zoom
@@ -27,6 +29,10 @@ func get_movement_input():
 	if Input.is_action_pressed("up"):
 		input.y -= 1
 	return input.normalized()
+
+func _process(delta):
+	if zoom != target_zoom:
+		zoom = lerp(zoom, target_zoom, zoom_speed * delta)
 
 func _physics_process(delta):
 	var input = get_movement_input()
@@ -57,4 +63,4 @@ func _physics_process(delta):
 				obj.apply_force(-col.get_normal() * push_force * delta)
 
 func attach_body_part(obj: BodyPart):
-	self.zoom /= obj.zoom_multiplier
+	self.target_zoom /= obj.zoom_multiplier
