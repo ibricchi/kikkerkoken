@@ -46,10 +46,16 @@ var seen_first_back_leg: bool = false
 func spawn_fly():
 	var fly: Fly = preload("res://scenes/fly.tscn").instantiate()
 	self.add_child(fly)
-	fly.position = Vector2(
+	
+	var temp_position : Vector2 = Vector2(0,0)
+	# don't spawn near player
+	while (temp_position -   $player.position).length() < 300:
+		temp_position = Vector2(
 		randf_range(random_x_start, random_x_end),
 		randf_range(random_y_start, random_y_end)
 	)
+	
+	fly.position = temp_position
 	flies.push_back(fly)
 
 func release_a_new_part():

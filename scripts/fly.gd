@@ -14,7 +14,7 @@ var frozen: bool = false
 func _ready() -> void:
 	vision_area.area_entered.connect( avoid_detected_object )
 	
-	self.modulate = Color( 1 - 0.4 *randf(),1 - 0.4 *randf(),1 - 0.4 *randf() )
+	self.modulate = Color( 1 - 0.3 *randf(),1 - 0.3 *randf(),1 - 0.3 *randf() )
 	wander_orientation =  randf() * (2 * PI)
 	linear_damp = 0.5
 	_animated_sprite.play("fly")
@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 		self.move_and_collide(
 			delta*cruise_velocity * tanh(wander_time)
 			* Vector2(cos(self.global_rotation), sin(self.global_rotation),))
+			
 
 func avoid_detected_object(obj):
 	if obj is Fly : 
@@ -44,5 +45,9 @@ func avoid_detected_object(obj):
 
 func freeze():
 	frozen = true
+	# make the fly flap its wings really fast when it gets caught 
+	_animated_sprite.speed_scale = 5
+	
 func unfreeze():
 	frozen = false
+	_animated_sprite.speed_scale = 1
