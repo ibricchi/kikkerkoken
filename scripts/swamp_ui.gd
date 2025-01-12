@@ -9,8 +9,20 @@ var camera: Camera2D
 # POINTS UI ELEMENT
 # 
 @onready var points_label: Label = $MarginContainer/PanelContainer/MarginContainer/GridContainer/points
-func update_point_counter(points: int):
-	points_label.text = str(points)
+func update_point_counter(points: int, points_to_next: int):
+	points_label.text = "%d / %d" % [points, points_to_next]
+
+#
+# TOUNGE COOLDOWN UI ELEMEENT
+#
+@onready var tounge_img: TextureRect = $MarginContainer/PanelContainer/MarginContainer/GridContainer/tounge_img
+@onready var tounge_level: Label = $MarginContainer/PanelContainer/MarginContainer/GridContainer/tounge
+func tounge_cooldown(level: float):
+	if not tounge_img.visible:
+		tounge_img.visible = true
+	if not tounge_level.visible:
+		tounge_level.visible = true
+	tounge_level.text = "%d%s" % [round((level) * 100), "%"]
 
 #
 # NOTIFICATION SYSTEM
@@ -54,6 +66,17 @@ func process_arrow(delta: float):
 		var direction = player.global_position - target.global_position
 		arrow.rotation = atan2(direction.y, direction.x) - PI / 2
 
+#
+# Connext to level signals
+#
+func connect_to_swamp_level_signals(level: SwampLevel):
+	level.points_changed.connect(update_point_counter)
+
+#
+# Connect to player signals
+#
+func connect_to_player_signals(player: Player):
+	player.tounge.tounge_cooldown_level.connect(tounge_cooldown)
 
 func _process(delta: float):
 	process_notification(delta)

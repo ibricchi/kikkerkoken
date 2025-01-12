@@ -45,7 +45,7 @@ static func create_eye() -> BodyPart:
 
 static func create_tounge() -> BodyPart:
 	var part: BodyPart = bp_scene.instantiate()
-	part.part_name = "eye"
+	part.part_name = "tounge"
 	part.part_type = PartType.TOUNGE
 	part.part_img = preload("res://assets/tounge.png")
 	return part

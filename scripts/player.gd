@@ -8,6 +8,7 @@ class_name Player
 @export var push_force: float = 20000
 @export var rotation_speed: float = 10
 @export var zoom_time: float = 2
+@export var initial_zoom: Vector2 = Vector2(3, 3)
 
 # children
 @onready var camera: Camera2D = $camera
@@ -16,7 +17,7 @@ class_name Player
 @onready var right_eye = $right_eye
 
 # Internal info
-var zoom: Vector2 = Vector2(3, 3):
+var zoom: Vector2:
 	set(_zoom):
 		zoom = _zoom
 		camera.zoom = zoom
@@ -24,7 +25,7 @@ var tounge_enabled: bool = false
 var zoom_tween: Tween = create_tween()
 
 func _ready() -> void:
-	camera.zoom = zoom
+	zoom = initial_zoom
 
 func get_movement_input():
 	var input = Vector2()
