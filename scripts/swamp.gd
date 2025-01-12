@@ -32,6 +32,8 @@ var body_parts: Array[Callable] = [
 	BodyPart.create_eye,
 	BodyPart.create_back_leg,
 	BodyPart.create_back_leg,
+	BodyPart.create_front_leg,
+	BodyPart.create_front_leg,
 ]
 var body_part_available: bool = false:
 	set(v):

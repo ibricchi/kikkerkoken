@@ -60,3 +60,10 @@ static func create_back_leg() -> BodyPart:
 	part.part_img = preload("res://assets/back_leg.png")
 	part.speed_modifier = 100
 	return part
+
+static func create_front_leg() -> BodyPart:
+	var part: BodyPart = bp_scene.instantiate()
+	part.part_name = "front_leg"
+	part.part_type = PartType.FRONT_LEG
+	part.part_img = preload("res://assets/back_leg.png")
+	return part

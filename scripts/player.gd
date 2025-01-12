@@ -17,6 +17,8 @@ class_name Player
 @onready var right_eye = $right_eye
 @onready var left_back_leg = $left_back_leg
 @onready var right_back_leg = $right_back_leg
+@onready var left_front_leg = $left_front_leg
+@onready var right_front_leg = $right_front_leg
 
 # Internal info
 var zoom: Vector2:
@@ -95,3 +97,9 @@ func attach_body_part(obj: BodyPart):
 			left_back_leg.visible = true
 		elif not right_back_leg.visible:
 			right_back_leg.visible = true
+	elif obj.part_type == BodyPart.PartType.FRONT_LEG:
+		max_speed += obj.speed_modifier
+		if not left_front_leg.visible:
+			left_front_leg.visible = true
+		elif not right_front_leg.visible:
+			right_front_leg.visible = true

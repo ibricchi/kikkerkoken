@@ -123,6 +123,18 @@ height = 32.0414
 motion_mode = 1
 script = ExtResource("1_1ddw4")
 
+[node name="left_front_leg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(30, -19)
+rotation = -2.53945
+texture = ExtResource("2_pbpqc")
+
+[node name="right_front_leg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(31, 16)
+rotation = 5.53968
+texture = ExtResource("2_pbpqc")
+
 [node name="left_back_leg" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-27.96, -9.345)
