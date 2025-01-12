@@ -36,7 +36,7 @@ var points: int = 0:
 func eye() -> BodyPart:
 	var eye: BodyPart = bp_scene.instantiate()
 	eye.part_name = "eye"
-	eye.part_img = preload("res://assets/no-image.png")
+	eye.part_img = preload("res://assets/eye.png")
 	eye.zoom_multiplier = 2
 	return eye
 

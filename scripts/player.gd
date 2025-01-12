@@ -62,5 +62,12 @@ func _physics_process(delta):
 			if obj is RigidBody2D:
 				obj.apply_force(-col.get_normal() * push_force * delta)
 
+@onready var left_eye = $left_eye
+@onready var right_eye = $right_eye
 func attach_body_part(obj: BodyPart):
-	self.target_zoom /= obj.zoom_multiplier
+	if obj.part_type == BodyPart.PartType.EYE:
+		target_zoom /= obj.zoom_multiplier
+		if !left_eye.visible:
+			left_eye.visible = true
+		else:
+			right_eye.visible = true

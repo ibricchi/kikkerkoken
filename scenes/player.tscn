@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://0nit1ug74kh2"]
+[gd_scene load_steps=16 format=3 uid="uid://0nit1ug74kh2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ddw4"]
 [ext_resource type="Texture2D" uid="uid://cyxpduslhf4um" path="res://assets/tadpole1anim.png" id="2_43ugr"]
+[ext_resource type="Texture2D" uid="uid://7i1xr0qp58sv" path="res://assets/eye.png" id="3_ddld6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hohk1"]
 atlas = ExtResource("2_43ugr")
@@ -125,3 +126,17 @@ animation = &"swim"
 position = Vector2(3, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_t40hw")
+
+[node name="left_eye" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(17, -7)
+rotation = -1.38405
+scale = Vector2(0.3125, 0.375)
+texture = ExtResource("3_ddld6")
+
+[node name="right_eye" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(17, 6.245)
+rotation = -1.77849
+scale = Vector2(-0.313, 0.375)
+texture = ExtResource("3_ddld6")

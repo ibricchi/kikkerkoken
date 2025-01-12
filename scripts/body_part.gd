@@ -1,7 +1,12 @@
 extends Area2D
 class_name BodyPart
 
+enum PartType {
+	EYE
+}
+
 @export var part_name: String
+@export var part_type: PartType
 @export var part_img: Resource:
 	set(img):
 		part_img = img
