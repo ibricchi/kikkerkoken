@@ -35,8 +35,12 @@ func _physics_process(delta: float) -> void:
 			* Vector2(cos(self.global_rotation), sin(self.global_rotation),))
 
 func avoid_detected_object(obj):
-	wander_orientation = wander_orientation + PI
-	wander_time += 3.0
+	if obj is Fly : 
+		obj.get_angle_to(obj.global_position)
+		wander_orientation += (-1)**round( randf()) * PI/6
+	else:
+		wander_orientation += PI
+	wander_time = max( 4.0, wander_time + 1.5)
 
 func freeze():
 	frozen = true
