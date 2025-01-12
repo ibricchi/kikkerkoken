@@ -1,25 +1,19 @@
 extends Node
 
+# Control vars
 @export var number_to_spwan: int = 20
 @export var random_x_start: int = 0
 @export var random_x_end: int = 1000
 @export var random_y_start: int = 0
 @export var random_y_end: int = 500
 
+# Children
 @onready var point_trap: FlyTrap = $point_trap
 @onready var ui: SwampUI = $UI
 @onready var player: Player = $player
 
+# Internal values
 var flies = []
-func spawn_fly():
-	var fly: Fly = preload("res://scenes/fly.tscn").instantiate()
-	self.add_child(fly)
-	fly.position = Vector2(
-		randf_range(random_x_start, random_x_end),
-		randf_range(random_y_start, random_y_end)
-	)
-	flies.push_back(fly)
-
 var points_to_next_part: int = 1;
 var ptnp_mult: float = 2;
 var points: int = 0:
@@ -30,18 +24,26 @@ var points: int = 0:
 			points_to_next_part *= ptnp_mult
 			release_a_new_part()
 		ui.update_point_counter(points)
-
 var in_order_parts: Array[Callable] = [
 	BodyPart.create_eye,
 ]
-
 var body_parts: Array[Callable] = [
 	BodyPart.create_eye,
 	BodyPart.create_tounge,
 ]
-
 var body_part_available: bool = false
 var target_body_part: BodyPart
+var seen_first_eye: bool = false
+
+func spawn_fly():
+	var fly: Fly = preload("res://scenes/fly.tscn").instantiate()
+	self.add_child(fly)
+	fly.position = Vector2(
+		randf_range(random_x_start, random_x_end),
+		randf_range(random_y_start, random_y_end)
+	)
+	flies.push_back(fly)
+
 func release_a_new_part():
 	if len(body_parts) > 0:
 		var new_part: BodyPart
@@ -61,12 +63,11 @@ func release_a_new_part():
 		body_part_available = true
 		target_body_part = new_part
 
-var first_eye: bool = true
 func part_attached_callback(type):
 	body_part_available = false
-	if type == BodyPart.PartType.EYE and first_eye:
+	if type == BodyPart.PartType.EYE and not seen_first_eye:
 		ui.notify("Wow! now that's a lot better, I can see so much more")
-		first_eye = false
+		seen_first_eye = true
 	if type == BodyPart.PartType.TOUNGE:
 		ui.notify("Press space to use your new sticky tounge!")
 

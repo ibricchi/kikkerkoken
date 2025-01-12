@@ -8,10 +8,11 @@ var cruise_velocity : float = 80
 var frozen: bool = false
 
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var vision_area = $VisionArea
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VisionArea.area_entered.connect( avoid_detected_object )
+	vision_area.area_entered.connect( avoid_detected_object )
 	
 	self.modulate = Color( 1 - 0.4 *randf(),1 - 0.4 *randf(),1 - 0.4 *randf() )
 	wander_orientation =  randf() * (2 * PI)

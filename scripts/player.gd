@@ -1,18 +1,27 @@
 extends CharacterBody2D
 class_name Player
 
+# Controls
 @export var max_speed: int = 400
 @export var acceleartion: float = 0.9
 @export var deceleration: float = 1.2
 @export var push_force: float = 20000
 @export var rotation_speed: float = 10
+@export var zoom_time: float = 2
 
-@onready var camera: Camera2D = get_node("camera")
-@onready var zoom: Vector2 = Vector2(3, 3):
+# children
+@onready var camera: Camera2D = $camera
+@onready var tounge: Tounge = $tounge
+@onready var left_eye = $left_eye
+@onready var right_eye = $right_eye
+
+# Internal info
+var zoom: Vector2 = Vector2(3, 3):
 	set(_zoom):
 		zoom = _zoom
 		camera.zoom = zoom
-@export var zoom_time: float = 2
+var tounge_enabled: bool = false
+var zoom_tween: Tween = create_tween()
 
 func _ready() -> void:
 	camera.zoom = zoom
@@ -29,8 +38,6 @@ func get_movement_input():
 		input.y -= 1
 	return input.normalized()
 
-var tounge_enabled: bool = false
-@onready var tounge: Tounge = $tounge
 func _process(delta):
 	if tounge_enabled && Input.is_action_just_pressed("space"):
 		if tounge.is_ready():
@@ -66,9 +73,6 @@ func _physics_process(delta):
 			if obj is RigidBody2D:
 				obj.apply_force(-col.get_normal() * push_force * delta)
 
-@onready var left_eye = $left_eye
-@onready var right_eye = $right_eye
-var zoom_tween: Tween = create_tween()
 func attach_body_part(obj: BodyPart):
 	if obj.part_type == BodyPart.PartType.EYE:
 		if zoom_tween.is_valid():

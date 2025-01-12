@@ -30,6 +30,10 @@ func attach_to_player(obj):
 func _ready():
 	body_entered.connect(attach_to_player)
 
+#
+# Body part creation functions
+#
+
 static var bp_scene = preload("res://scenes/body_part.tscn")
 static func create_eye() -> BodyPart:
 	var part: BodyPart = bp_scene.instantiate()
