@@ -8,12 +8,11 @@ class_name Player
 @export var rotation_speed: float = 10
 
 @onready var camera: Camera2D = get_node("camera")
-@export var zoom_speed: float = 1
-@export var target_zoom: Vector2 = Vector2(3, 3)
-@onready var zoom: Vector2 = target_zoom:
+@onready var zoom: Vector2 = Vector2(3, 3):
 	set(_zoom):
 		zoom = _zoom
 		camera.zoom = zoom
+@export var zoom_time: float = 2
 
 func _ready() -> void:
 	camera.zoom = zoom
@@ -33,11 +32,11 @@ func get_movement_input():
 var tounge_enabled: bool = false
 @onready var tounge: Tounge = $tounge
 func _process(delta):
-	if zoom != target_zoom:
-		zoom = lerp(zoom, target_zoom, zoom_speed * delta)
-	
-	if tounge_enabled && Input.is_action_just_pressed("space") && tounge.is_ready():
-		tounge.extend_tounge()
+	if tounge_enabled && Input.is_action_just_pressed("space"):
+		if tounge.is_ready():
+			tounge.extend_tounge()
+		else:
+			print("Tounge not ready")
 
 func _physics_process(delta):
 	var input = get_movement_input()
@@ -69,9 +68,13 @@ func _physics_process(delta):
 
 @onready var left_eye = $left_eye
 @onready var right_eye = $right_eye
+var zoom_tween: Tween = create_tween()
 func attach_body_part(obj: BodyPart):
 	if obj.part_type == BodyPart.PartType.EYE:
-		target_zoom /= obj.zoom_multiplier
+		if zoom_tween.is_valid():
+			zoom_tween.exit()
+		zoom_tween = create_tween()
+		zoom_tween.tween_property(self, "zoom", zoom / obj.zoom_multiplier, zoom_time)
 		if !left_eye.visible:
 			left_eye.visible = true
 		else:
