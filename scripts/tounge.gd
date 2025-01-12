@@ -2,25 +2,30 @@ extends Area2D
 class_name Tounge
 
 @export var tounge_time: float = 3
+@export var tounge_extend_speed: float = 1
+@export var tounge_retract_speed: float = 1
 @onready var tounge_timer = $Timer
-@export var max_length: float = 400
-@export var extend_speed: float = 1
-var target_length: float = 0
+@onready var starting_position: Vector2 = self.position
+@export var max_length: float = 3
 
 func is_ready() -> bool:
 	return true
 
+var tounge_tween: Tween = create_tween()
 func extend_tounge():
-	target_length = max_length
+	if tounge_tween.is_valid():
+		tounge_tween.kill()
+	tounge_tween = create_tween()
+	tounge_tween.tween_property(self, "scale", Vector2(max_length, max_length), tounge_extend_speed)
+	
 	tounge_timer.timeout.connect(retract_tounge)
 	tounge_timer.start(tounge_time)
 
 func retract_tounge():
-	target_length = 0
+	if tounge_tween.is_valid():
+		tounge_tween.kill()
+	tounge_tween = create_tween()
+	tounge_tween.tween_property(self, "scale", Vector2(0, 0), tounge_retract_speed)
 
 func _ready() -> void:
-	pass # Replace with function body.
-
-func _process(delta: float) -> void:
-	if scale.y != target_length:
-		scale.y = lerp(scale.y, target_length, extend_speed * delta)
+	pass

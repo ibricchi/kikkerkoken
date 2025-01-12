@@ -33,7 +33,6 @@ var points: int = 0:
 
 var in_order_parts: Array[Callable] = [
 	BodyPart.create_eye,
-	BodyPart.create_tounge
 ]
 
 var body_parts: Array[Callable] = [
@@ -51,7 +50,7 @@ func release_a_new_part():
 		else:
 			var new_part_idx: int = randi() % len(body_parts)
 			new_part = body_parts.pop_at(new_part_idx).call()
-		new_part.disable_callback = func(): body_part_available = false
+		new_part.on_attached.connect(part_attached_callback)
 		add_child(new_part)
 		new_part.position = Vector2(
 			randf_range(random_x_start, random_x_end),
@@ -61,6 +60,15 @@ func release_a_new_part():
 		ui.notify("Congrats you unlocked a new part, go find your new %s!" % new_part.name)
 		body_part_available = true
 		target_body_part = new_part
+
+var first_eye: bool = true
+func part_attached_callback(type):
+	body_part_available = false
+	if type == BodyPart.PartType.EYE and first_eye:
+		ui.notify("Wow! now that's a lot better, I can see so much more")
+		first_eye = false
+	if type == BodyPart.PartType.TOUNGE:
+		ui.notify("Press space to use your new sticky tounge!")
 
 func entered_point_trap(fly: Node2D):
 	if fly is Fly:
