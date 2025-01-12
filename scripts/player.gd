@@ -8,7 +8,7 @@ class_name Player
 @export var rotation_speed: float = 10
 
 @onready var camera: Camera2D = get_node("camera")
-@onready var zoom: Vector2 = Vector2(1,1):
+@onready var zoom: Vector2 = Vector2(3,3):
 	set(_zoom):
 		zoom = _zoom
 		camera.zoom = zoom
@@ -48,12 +48,13 @@ func _physics_process(delta):
 	else:
 		$AnimatedSprite2D.play("swim")
 		$AnimatedSprite2D.speed_scale = 1.6
-		
-		
-		
-	
+
 	if move_and_slide():
-		var col = get_last_slide_collision()
-		var obj = col.get_collider()
-		if obj is RigidBody2D:
-			obj.apply_force(-col.get_normal() * push_force * delta )
+		for i in get_slide_collision_count():
+			var col = get_slide_collision(i)
+			var obj = col.get_collider()
+			if obj is RigidBody2D:
+				obj.apply_force(-col.get_normal() * push_force * delta)
+
+func attach_body_part(obj: BodyPart):
+	self.zoom /= obj.zoom_multiplier

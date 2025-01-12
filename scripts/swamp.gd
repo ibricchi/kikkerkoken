@@ -25,7 +25,7 @@ var ptnp_mult: float = 2;
 var points: int = 0:
 	set(new_points):
 		points = new_points
-		if points >= points_to_next_part:
+		if not body_part_available and points >= points_to_next_part:
 			points -= points_to_next_part
 			points_to_next_part *= ptnp_mult
 			release_a_new_part()
@@ -33,21 +33,24 @@ var points: int = 0:
 
 ## CREATE BODY PARTS
 @onready var bp_scene = preload("res://scenes/body_part.tscn")
-func eye1() -> BodyPart:
+func eye() -> BodyPart:
 	var eye: BodyPart = bp_scene.instantiate()
 	eye.part_name = "eye"
 	eye.part_img = preload("res://assets/no-image.png")
-	eye.zoom_multiplier = 3
+	eye.zoom_multiplier = 2
 	return eye
 
 @onready var body_parts: Array[Callable] = [
-	eye1
+	eye, eye, eye, eye
 ]
 
+var body_part_available: bool = false
+var target_body_part: BodyPart
 func release_a_new_part():
 	if len(body_parts) > 0:
 		var new_part_idx: int = randi() % len(body_parts)
 		var new_part: BodyPart = body_parts.pop_at(new_part_idx).call()
+		new_part.disable_callback = func(): body_part_available = false
 		add_child(new_part)
 		new_part.position = Vector2(
 			randf_range(random_x_start, random_x_end),
@@ -55,11 +58,14 @@ func release_a_new_part():
 		)
 		ui.show_direction_to(new_part)
 		ui.notify("Congrats you unlocked a new part, go find your new %s!" % new_part.name)
+		body_part_available = true
+		target_body_part = new_part
 
 func entered_point_trap(fly: Node2D):
 	if fly is Fly:
 		flies.erase(fly)
 		self.remove_child(fly)
+		fly.queue_free()
 		points += 1
 		spawn_fly()
 
@@ -79,4 +85,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if body_part_available and target_body_part.is_on_screen():
+		ui.disable_directions()

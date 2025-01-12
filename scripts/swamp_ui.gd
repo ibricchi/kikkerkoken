@@ -25,13 +25,15 @@ func notify(msg: String, duration: int = 3, color: Color = Color.SEA_GREEN, pg_c
 	notification_timer.start(duration)
 
 var player: Player
+var camera: Camera2D
 var target: Node2D
 @onready var arrow_container: MarginContainer = $ArrowContainer
 @onready var arrow: TextureRect = $ArrowContainer/Arrow
 func show_direction_to(new_target: Node2D):
-	print(new_target.position)
 	target = new_target
 	arrow_container.visible = true
+func disable_directions():
+	arrow_container.visible = false
 
 func _process(delta: float):
 	notification_progress.value = notification_timer.time_left * 100
