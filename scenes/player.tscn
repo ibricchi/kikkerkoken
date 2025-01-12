@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://0nit1ug74kh2"]
+[gd_scene load_steps=20 format=3 uid="uid://0nit1ug74kh2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ddw4"]
 [ext_resource type="Texture2D" uid="uid://cyxpduslhf4um" path="res://assets/tadpole1anim.png" id="2_43ugr"]
+[ext_resource type="Texture2D" uid="uid://dluklpvvq3w6j" path="res://assets/back_leg.png" id="2_pbpqc"]
 [ext_resource type="Texture2D" uid="uid://7i1xr0qp58sv" path="res://assets/eye.png" id="3_ddld6"]
 [ext_resource type="Texture2D" uid="uid://bawn3v83hrcji" path="res://assets/tounge.png" id="4_mcw0j"]
 [ext_resource type="Script" path="res://scripts/tounge.gd" id="4_oxcsk"]
@@ -121,6 +122,18 @@ height = 32.0414
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1ddw4")
+
+[node name="left_back_leg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-27.96, -9.345)
+rotation = 2.03854
+texture = ExtResource("2_pbpqc")
+
+[node name="right_back_leg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-27.96, 9.345)
+rotation = 1.14668
+texture = ExtResource("2_pbpqc")
 
 [node name="camera" type="Camera2D" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bgtewmerkpp3o"]
+[gd_scene load_steps=17 format=4 uid="uid://bgtewmerkpp3o"]
 
 [ext_resource type="Script" path="res://scripts/swamp.gd" id="1_bjoxf"]
 [ext_resource type="PackedScene" uid="uid://0nit1ug74kh2" path="res://scenes/player.tscn" id="1_d5svk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/swamp_ui.gd" id="7_iuih5"]
 [ext_resource type="Texture2D" uid="uid://d35mkbtbxmmbw" path="res://assets/fly.png" id="7_xi4gg"]
 [ext_resource type="Texture2D" uid="uid://c5s8tx8jlijhp" path="res://assets/pointer.png" id="9_7mxp7"]
+[ext_resource type="Texture2D" uid="uid://bawn3v83hrcji" path="res://assets/tounge.png" id="9_sxbhs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dk05l"]
 texture = ExtResource("4_ac3gr")
@@ -114,7 +115,7 @@ vertical_alignment = 1
 [node name="tounge_img" type="TextureRect" parent="UI/MarginContainer/PanelContainer/MarginContainer/GridContainer"]
 visible = false
 layout_mode = 2
-texture = ExtResource("7_xi4gg")
+texture = ExtResource("9_sxbhs")
 expand_mode = 3
 stretch_mode = 5
 

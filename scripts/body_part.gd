@@ -4,6 +4,8 @@ class_name BodyPart
 enum PartType {
 	EYE,
 	TOUNGE,
+	BACK_LEG,
+	FRONT_LEG,
 }
 
 @export var part_name: String
@@ -15,6 +17,7 @@ enum PartType {
 		$Sprite2D.texture = img
 
 @export var zoom_multiplier: int = 1
+@export var speed_modifier: int = 0
 
 func is_on_screen() -> bool:
 	return $VisibleOnScreenNotifier2D.is_on_screen()
@@ -48,4 +51,12 @@ static func create_tounge() -> BodyPart:
 	part.part_name = "tounge"
 	part.part_type = PartType.TOUNGE
 	part.part_img = preload("res://assets/tounge.png")
+	return part
+
+static func create_back_leg() -> BodyPart:
+	var part: BodyPart = bp_scene.instantiate()
+	part.part_name = "back_leg"
+	part.part_type = PartType.BACK_LEG
+	part.part_img = preload("res://assets/back_leg.png")
+	part.speed_modifier = 100
 	return part

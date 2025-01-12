@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 # Controls
-@export var max_speed: int = 400
+@export var max_speed: int = 200
 @export var acceleartion: float = 0.9
 @export var deceleration: float = 1.2
 @export var push_force: float = 20000
@@ -15,6 +15,8 @@ class_name Player
 @onready var tounge: Tounge = $tounge
 @onready var left_eye = $left_eye
 @onready var right_eye = $right_eye
+@onready var left_back_leg = $left_back_leg
+@onready var right_back_leg = $right_back_leg
 
 # Internal info
 var zoom: Vector2:
@@ -80,10 +82,16 @@ func attach_body_part(obj: BodyPart):
 			zoom_tween.exit()
 		zoom_tween = create_tween()
 		zoom_tween.tween_property(self, "zoom", zoom / obj.zoom_multiplier, zoom_time)
-		if !left_eye.visible:
+		if not left_eye.visible:
 			left_eye.visible = true
 		else:
 			right_eye.visible = true
 	elif obj.part_type == BodyPart.PartType.TOUNGE:
 		tounge_enabled = true
 		tounge.visible = true
+	elif obj.part_type == BodyPart.PartType.BACK_LEG:
+		max_speed += obj.speed_modifier
+		if not left_back_leg.visible:
+			left_back_leg.visible = true
+		elif not right_back_leg.visible:
+			right_back_leg.visible = true

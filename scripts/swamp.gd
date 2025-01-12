@@ -26,10 +26,12 @@ var points: int = 0:
 		points_changed.emit(points, points_to_next_part)
 var in_order_parts: Array[Callable] = [
 	BodyPart.create_eye,
+	BodyPart.create_tounge,
 ]
 var body_parts: Array[Callable] = [
 	BodyPart.create_eye,
-	BodyPart.create_tounge,
+	BodyPart.create_back_leg,
+	BodyPart.create_back_leg,
 ]
 var body_part_available: bool = false:
 	set(v):
@@ -37,6 +39,7 @@ var body_part_available: bool = false:
 		check_points_for_parts()
 var target_body_part: BodyPart
 var seen_first_eye: bool = false
+var seen_first_back_leg: bool = false
 
 func spawn_fly():
 	var fly: Fly = preload("res://scenes/fly.tscn").instantiate()
@@ -73,6 +76,8 @@ func part_attached_callback(type):
 		seen_first_eye = true
 	if type == BodyPart.PartType.TOUNGE:
 		ui.notify("Press space to use your new sticky tounge!")
+	if type == BodyPart.PartType.BACK_LEG:
+		ui.notify("I'm a speed machine!")
 
 func check_points_for_parts():
 	if not body_part_available and points >= points_to_next_part:
