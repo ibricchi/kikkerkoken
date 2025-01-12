@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://0nit1ug74kh2"]
+[gd_scene load_steps=19 format=3 uid="uid://0nit1ug74kh2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ddw4"]
 [ext_resource type="Texture2D" uid="uid://cyxpduslhf4um" path="res://assets/tadpole1anim.png" id="2_43ugr"]
 [ext_resource type="Texture2D" uid="uid://7i1xr0qp58sv" path="res://assets/eye.png" id="3_ddld6"]
+[ext_resource type="Texture2D" uid="uid://bawn3v83hrcji" path="res://assets/tounge.png" id="4_mcw0j"]
+[ext_resource type="Script" path="res://scripts/tounge.gd" id="4_oxcsk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hohk1"]
 atlas = ExtResource("2_43ugr")
@@ -112,6 +114,10 @@ animations = [{
 radius = 18.0
 height = 54.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ndq0t"]
+radius = 7.99726
+height = 32.0414
+
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1ddw4")
@@ -140,3 +146,20 @@ position = Vector2(17, 6.245)
 rotation = -1.77849
 scale = Vector2(-0.313, 0.375)
 texture = ExtResource("3_ddld6")
+
+[node name="tounge" type="Area2D" parent="."]
+visible = false
+position = Vector2(46, -1.19209e-07)
+rotation = 1.5708
+scale = Vector2(1, 1e-05)
+script = ExtResource("4_oxcsk")
+
+[node name="Sprite2D" type="Sprite2D" parent="tounge"]
+texture = ExtResource("4_mcw0j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tounge"]
+position = Vector2(-0.999657, 0.0261771)
+shape = SubResource("CapsuleShape2D_ndq0t")
+
+[node name="Timer" type="Timer" parent="tounge"]
+wait_time = 3.0

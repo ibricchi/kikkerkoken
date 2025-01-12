@@ -30,9 +30,14 @@ func get_movement_input():
 		input.y -= 1
 	return input.normalized()
 
+var tounge_enabled: bool = false
+@onready var tounge: Tounge = $tounge
 func _process(delta):
 	if zoom != target_zoom:
 		zoom = lerp(zoom, target_zoom, zoom_speed * delta)
+	
+	if tounge_enabled && Input.is_action_just_pressed("space") && tounge.is_ready():
+		tounge.extend_tounge()
 
 func _physics_process(delta):
 	var input = get_movement_input()
@@ -71,3 +76,6 @@ func attach_body_part(obj: BodyPart):
 			left_eye.visible = true
 		else:
 			right_eye.visible = true
+	elif obj.part_type == BodyPart.PartType.TOUNGE:
+		tounge_enabled = true
+		tounge.visible = true

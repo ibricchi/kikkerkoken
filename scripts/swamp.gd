@@ -31,25 +31,26 @@ var points: int = 0:
 			release_a_new_part()
 		ui.update_point_counter(points)
 
-## CREATE BODY PARTS
-@onready var bp_scene = preload("res://scenes/body_part.tscn")
-func eye() -> BodyPart:
-	var eye: BodyPart = bp_scene.instantiate()
-	eye.part_name = "eye"
-	eye.part_img = preload("res://assets/eye.png")
-	eye.zoom_multiplier = 2
-	return eye
+var in_order_parts: Array[Callable] = [
+	BodyPart.create_eye,
+	BodyPart.create_tounge
+]
 
-@onready var body_parts: Array[Callable] = [
-	eye, eye, eye, eye
+var body_parts: Array[Callable] = [
+	BodyPart.create_eye,
+	BodyPart.create_tounge,
 ]
 
 var body_part_available: bool = false
 var target_body_part: BodyPart
 func release_a_new_part():
 	if len(body_parts) > 0:
-		var new_part_idx: int = randi() % len(body_parts)
-		var new_part: BodyPart = body_parts.pop_at(new_part_idx).call()
+		var new_part: BodyPart
+		if len(in_order_parts) != 0:
+			new_part = in_order_parts.pop_front().call()
+		else:
+			var new_part_idx: int = randi() % len(body_parts)
+			new_part = body_parts.pop_at(new_part_idx).call()
 		new_part.disable_callback = func(): body_part_available = false
 		add_child(new_part)
 		new_part.position = Vector2(

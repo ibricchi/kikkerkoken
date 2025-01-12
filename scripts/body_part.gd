@@ -2,7 +2,8 @@ extends Area2D
 class_name BodyPart
 
 enum PartType {
-	EYE
+	EYE,
+	TOUNGE,
 }
 
 @export var part_name: String
@@ -29,3 +30,19 @@ func attach_to_player(obj):
 
 func _ready():
 	body_entered.connect(attach_to_player)
+
+static var bp_scene = preload("res://scenes/body_part.tscn")
+static func create_eye() -> BodyPart:
+	var part: BodyPart = bp_scene.instantiate()
+	part.part_name = "eye"
+	part.part_type = PartType.EYE
+	part.part_img = preload("res://assets/eye.png")
+	part.zoom_multiplier = 2
+	return part
+
+static func create_tounge() -> BodyPart:
+	var part: BodyPart = bp_scene.instantiate()
+	part.part_name = "eye"
+	part.part_type = PartType.TOUNGE
+	part.part_img = preload("res://assets/tounge.png")
+	return part
