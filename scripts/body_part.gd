@@ -48,14 +48,14 @@ static func create_eye() -> BodyPart:
 
 static func create_tounge() -> BodyPart:
 	var part: BodyPart = bp_scene.instantiate()
-	part.part_name = "tounge"
+	part.part_name = "tongue"
 	part.part_type = PartType.TOUNGE
 	part.part_img = preload("res://assets/tounge.png")
 	return part
 
 static func create_back_leg() -> BodyPart:
 	var part: BodyPart = bp_scene.instantiate()
-	part.part_name = "back_leg"
+	part.part_name = "back leg"
 	part.part_type = PartType.BACK_LEG
 	part.part_img = preload("res://assets/back_leg.png")
 	part.speed_modifier = 100

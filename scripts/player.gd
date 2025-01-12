@@ -46,7 +46,7 @@ func _process(delta):
 		if tounge.is_ready():
 			tounge.extend_tounge()
 		else:
-			print("Tounge not ready")
+			print("Tongue not ready")
 
 func _physics_process(delta):
 	var input = get_movement_input()
