@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var max_speed: int = 400
 @export var acceleartion: float = 0.9
@@ -7,7 +8,7 @@ extends CharacterBody2D
 @export var rotation_speed: float = 10
 
 @onready var camera: Camera2D = get_node("camera")
-@onready var zoom: Vector2 = Vector2(3,3):
+@onready var zoom: Vector2 = Vector2(1,1):
 	set(_zoom):
 		zoom = _zoom
 		camera.zoom = zoom
