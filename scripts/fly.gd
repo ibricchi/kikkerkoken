@@ -10,6 +10,8 @@ var cruise_velocity : float = 80
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$VisionArea.area_entered.connect( avoid_detected_object )
+	
 	self.modulate = Color( 1 - 0.4 *randf(),1 - 0.4 *randf(),1 - 0.4 *randf() )
 	wander_orientation =  randf() * (2 * PI)
 	linear_damp = 0.5
@@ -29,4 +31,9 @@ func _physics_process(delta: float) -> void:
 	self.move_and_collide(
 		delta*cruise_velocity * tanh(wander_time)
 		* Vector2(cos(self.global_rotation), sin(self.global_rotation),))
+		
+		
+func avoid_detected_object(obj):
+	wander_orientation = wander_orientation + PI
+	wander_time += 3.0
 	

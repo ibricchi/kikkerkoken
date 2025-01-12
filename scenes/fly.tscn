@@ -63,3 +63,9 @@ frame_progress = 0.195183
 position = Vector2(3, 0)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_vtgmd")
+
+[node name="VisionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea"]
+polygon = PackedVector2Array(-20, 100, -20, -100, 100, -50, 175, 0, 100, 50)
