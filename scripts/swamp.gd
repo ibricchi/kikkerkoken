@@ -2,7 +2,7 @@ extends Node
 class_name SwampLevel
 
 # Control vars
-@export var number_to_spwan: int = 20
+@export var number_to_spwan: int = 200
 @export var random_x_start: int = 0
 @export var random_x_end: int = 1000
 @export var random_y_start: int = 0
@@ -26,14 +26,13 @@ var points: int = 0:
 		points_changed.emit(points, points_to_next_part)
 var in_order_parts: Array[Callable] = [
 	BodyPart.create_eye,
-	BodyPart.create_tounge,
 ]
 var body_parts: Array[Callable] = [
 	BodyPart.create_eye,
 	BodyPart.create_back_leg,
+	BodyPart.create_tounge,
 	BodyPart.create_back_leg,
-	BodyPart.create_front_leg,
-	BodyPart.create_front_leg,
+	BodyPart.create_front_legs,
 ]
 var body_part_available: bool = false:
 	set(v):
@@ -84,8 +83,11 @@ func part_attached_callback(type):
 		seen_first_eye = true
 	if type == BodyPart.PartType.TOUNGE:
 		ui.notify("Press space to use your new sticky tounge!")
-	if type == BodyPart.PartType.BACK_LEG:
+	if type == BodyPart.PartType.BACK_LEG and not seen_first_back_leg:
 		ui.notify("I'm a speed machine!")
+		seen_first_back_leg = true
+	if type == BodyPart.PartType.FRONT_LEGS:
+		ui.notify("These make it so much easier to push those pesky flies!")
 
 func check_points_for_parts():
 	if not body_part_available and points >= points_to_next_part:

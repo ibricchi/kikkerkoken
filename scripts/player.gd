@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 # Controls
-@export var max_speed: int = 200
+@export var max_speed: int = 300
 @export var acceleartion: float = 0.9
 @export var deceleration: float = 1.2
 @export var push_force: float = 20000
@@ -97,9 +97,10 @@ func attach_body_part(obj: BodyPart):
 			left_back_leg.visible = true
 		elif not right_back_leg.visible:
 			right_back_leg.visible = true
-	elif obj.part_type == BodyPart.PartType.FRONT_LEG:
+	elif obj.part_type == BodyPart.PartType.FRONT_LEGS:
 		max_speed += obj.speed_modifier
 		if not left_front_leg.visible:
 			left_front_leg.visible = true
-		elif not right_front_leg.visible:
+			left_front_leg.set_deferred("disabled", false)
 			right_front_leg.visible = true
+			right_front_leg.set_deferred("disabled", false)

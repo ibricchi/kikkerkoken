@@ -5,7 +5,7 @@ enum PartType {
 	EYE,
 	TOUNGE,
 	BACK_LEG,
-	FRONT_LEG,
+	FRONT_LEGS,
 }
 
 @export var part_name: String
@@ -61,9 +61,9 @@ static func create_back_leg() -> BodyPart:
 	part.speed_modifier = 100
 	return part
 
-static func create_front_leg() -> BodyPart:
+static func create_front_legs() -> BodyPart:
 	var part: BodyPart = bp_scene.instantiate()
-	part.part_name = "front_leg"
-	part.part_type = PartType.FRONT_LEG
+	part.part_name = "front legs"
+	part.part_type = PartType.FRONT_LEGS
 	part.part_img = preload("res://assets/back_leg.png")
 	return part
