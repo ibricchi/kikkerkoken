@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="kikkerkoken"
-run/main_scene="res://swamp.tscn"
+run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Music="*res://scenes/music.tscn"
 
 [input]
 

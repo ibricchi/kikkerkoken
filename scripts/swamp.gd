@@ -17,6 +17,8 @@ class_name SwampLevel
 signal points_changed(points, points_to_next_part)
 
 # Internal values
+var start_time
+var end_time
 var flies = []
 var points_to_next_part: int = 1;
 var ptnp_mult: float = 2;
@@ -25,14 +27,14 @@ var points: int = 0:
 		points = new_points
 		points_changed.emit(points, points_to_next_part)
 var in_order_parts: Array[Callable] = [
-	BodyPart.create_eye,
+	#BodyPart.create_eye,
 ]
 var body_parts: Array[Callable] = [
-	BodyPart.create_eye,
-	BodyPart.create_back_leg,
-	BodyPart.create_tounge,
-	BodyPart.create_back_leg,
-	BodyPart.create_front_legs,
+	#BodyPart.create_eye,
+	#BodyPart.create_back_leg,
+	#BodyPart.create_tounge,
+	#BodyPart.create_back_leg,
+	#BodyPart.create_front_legs,
 ]
 var body_part_available: bool = false:
 	set(v):
@@ -62,7 +64,7 @@ func release_a_new_part():
 		var new_part: BodyPart
 		if len(in_order_parts) != 0:
 			new_part = in_order_parts.pop_front().call()
-		else:
+		elif len(body_parts) != 0:
 			var new_part_idx: int = randi() % len(body_parts)
 			new_part = body_parts.pop_at(new_part_idx).call()
 		new_part.on_attached.connect(part_attached_callback)
@@ -75,6 +77,9 @@ func release_a_new_part():
 		ui.notify("Congrats you unlocked a new part, go find your new %s!" % new_part.part_name)
 		body_part_available = true
 		target_body_part = new_part
+	else:
+		print("game_over")
+		game_over()
 
 func part_attached_callback(type):
 	body_part_available = false
@@ -103,7 +108,7 @@ func entered_point_trap(fly: Node2D):
 		points += 1
 		check_points_for_parts()
 		spawn_fly()
-	
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# setup ui
@@ -115,9 +120,18 @@ func _ready() -> void:
 	for i in number_to_spwan:
 		spawn_fly()
 		
+	start_time = Time.get_ticks_msec()
+	
 	# set callback for fly trap
 	point_trap.body_entered_callback = entered_point_trap
 
+func game_over():
+	end_time = Time.get_ticks_msec()
+	var high_score_path = "user://last_score.ini"
+	var config_file = ConfigFile.new()
+	config_file.set_value("game", "time", end_time - start_time)
+	config_file.save(high_score_path)
+	get_tree().change_scene_to_file("res://.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
