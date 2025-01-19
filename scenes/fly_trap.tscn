@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://hie6y7rxqhgg"]
 
 [ext_resource type="Script" path="res://scripts/fly_trap.gd" id="1_06os3"]
-[ext_resource type="Texture2D" uid="uid://dkt4os1rdvcj6" path="res://assets/no-image.png" id="1_y2gv1"]
+[ext_resource type="Texture2D" uid="uid://bwkxb20wtpeoo" path="res://assets/house.png" id="2_l8maq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jdtgm"]
 size = Vector2(27, 26)
@@ -14,4 +14,5 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_jdtgm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_y2gv1")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_l8maq")

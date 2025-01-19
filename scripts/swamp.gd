@@ -30,11 +30,11 @@ var in_order_parts: Array[Callable] = [
 	#BodyPart.create_eye,
 ]
 var body_parts: Array[Callable] = [
-	#BodyPart.create_eye,
-	#BodyPart.create_back_leg,
-	#BodyPart.create_tounge,
-	#BodyPart.create_back_leg,
-	#BodyPart.create_front_legs,
+	BodyPart.create_eye,
+	BodyPart.create_back_leg,
+	BodyPart.create_tounge,
+	BodyPart.create_back_leg,
+	BodyPart.create_front_legs,
 ]
 var body_part_available: bool = false:
 	set(v):
